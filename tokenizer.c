@@ -31,6 +31,12 @@ char** tokenizer(char* command_input) {
 }
 
 
+
+void command_seprator(char* string){
+
+
+}
+
 // This function is intended to remove any kind of extra space
 
 void trim_white_spaces(char* string ){
@@ -71,7 +77,12 @@ void trim_white_spaces(char* string ){
 
 }
 
+int check_input_length(char* command_input){
 
+  size_t input_length = strlen(command_input);
+  return input_length <= 8190; 
+
+}
 
 
 

@@ -4,7 +4,7 @@
 #include "tokenizer.h"
 #include "readinput.h"
 
-#define MAX_CMD_LENGTH 10
+#define MAX_CMD_LENGTH 500
 
 int read_input() {
     char command_input[MAX_CMD_LENGTH];
@@ -14,7 +14,6 @@ int read_input() {
         // Print shell prompt
         printf("sh> ");
         
-
         // Read input
         if (fgets(command_input, sizeof(command_input), stdin) == NULL) {
             perror("Error reading input");
@@ -23,6 +22,7 @@ int read_input() {
 
         // Remove newline if present
         size_t len = strlen(command_input);
+
         if (len > 0 && command_input[len - 1] == '\n') {
             command_input[len - 1] = '\0';
         }
