@@ -3,6 +3,7 @@
 #include <string.h>
 #include "tokenizer.h"
 #include "readinput.h"
+#include <unistd.h>
 
 #define MAX_CMD_LENGTH 500
 
@@ -13,24 +14,18 @@ int read_input() {
     while (running) {
         // Print shell prompt
         printf("sh> ");
-        
+        fflush(stdout);
+
         // Read input
-        if (fgets(command_input, sizeof(command_input), stdin) == NULL) {
-            perror("Error reading input");
-            continue;
-        }
+       
+        size_t read_bytes = read(STDIN_FILENO,command_input , sizeof(command_input));
 
         // Remove newline if present
-        size_t len = strlen(command_input);
-
-        if (len > 0 && command_input[len - 1] == '\n') {
-            command_input[len - 1] = '\0';
-        }
-    else {
-            int ch;
-            while ((ch = getchar()) != '\n' && ch != EOF);
-        }
-
+      if(read_bytes >0){
+        command_input[read_bytes] = '\0';
+      }else{
+        continue;
+      }
         // Trim whitespace
         trim_white_spaces(command_input);
 
