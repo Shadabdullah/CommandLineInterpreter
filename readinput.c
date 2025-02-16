@@ -16,16 +16,9 @@ int read_input() {
         printf("sh> ");
         fflush(stdout);
 
-        // Read input
-       
-        size_t read_bytes = read(STDIN_FILENO,command_input , sizeof(command_input));
+     // Here we are taking input from user   
+     size_t read_bytes = read(STDIN_FILENO,command_input , sizeof(command_input)-1);
 
-        // Remove newline if present
-      if(read_bytes >0){
-        command_input[read_bytes] = '\0';
-      }else{
-        continue;
-      }
         // Trim whitespace
         trim_white_spaces(command_input);
 
